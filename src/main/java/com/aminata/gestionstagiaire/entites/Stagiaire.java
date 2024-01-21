@@ -17,7 +17,7 @@ public class Stagiaire {
     @NonNull
     private String uuid = genererRandomUUID();
     @NonNull
-    private Long nni;
+    private String nni;
     @NonNull
     private String nom;
     @NonNull
@@ -25,7 +25,7 @@ public class Stagiaire {
     @NonNull
     private Date datenaiss;
     @NonNull
-    private Long telephone;
+    private String telephone;
     @NonNull
     private String email;
     @NonNull
@@ -37,7 +37,7 @@ public class Stagiaire {
     private String niveau;
     private String nationnalite;
 
-    public Stagiaire(String uuid, Long nni, String nom, String prenom, Date datenaiss, Long telephone, String email, String adresse, String etablissement, String formation, String niveau, String nationnalite) {
+    public Stagiaire(String uuid, String nni, String nom, String prenom, Date datenaiss, String telephone, String email, String adresse, String etablissement, String formation, String niveau, String nationnalite) {
         this.uuid = uuid;
         this.nni = nni;
         this.nom = nom;

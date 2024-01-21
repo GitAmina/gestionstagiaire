@@ -25,9 +25,9 @@ public interface StagiaireRepository extends JpaRepository<Stagiaire,Long> {
     @RestResource(path = "/nom")
     List<Stagiaire> findByNomContains(@Param("nom") String nom);
     @RestResource(path = "/nni")
-    List<Stagiaire> findByNni(@Param("nni") Long nni);
+    List<Stagiaire> findByNniContains(@Param("nni") String nni);
     @RestResource(path = "/telephone")
-    List<Stagiaire> findByTelephone(@Param("telephone") Long telephone);
+    List<Stagiaire> findByTelephoneContains(@Param("telephone") String telephone);
     Stagiaire findByEmail(String email);
 
     List<Stagiaire> findByNom(String nom);

@@ -20,9 +20,9 @@ public class Badge {
     @NonNull
     private Date datedelivrance;
 
-    public Badge(Long code, Stage stage) {
+    public Badge(Long code, Date date, Stage stage) {
         this.uuid = genererRandomUUID();
-        this.datedelivrance = new Date();
+        this.datedelivrance = date;
         this.code = code;
         this.stage = stage;
     }
