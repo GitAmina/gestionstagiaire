@@ -19,15 +19,20 @@ public class MailServiceImpl {
     @Autowired
     private StageService stageservice;
 
-    @Scheduled(cron = "0 0 0 * * ?") // Tous les jours à minuit
-    //@Scheduled(cron = "*/10 * * * * *") //
+    //@Scheduled(cron = "0 0 0 * * ?") // Tous les jours à minuit
+    @Scheduled(cron = "*/10 * * * * *") // Toutes les 10s
     public void checkAndSendEmails() {
         List<Stage> stages = stageservice.getAllStage();
 
         // Vérifiez les stages dont la date de fin est échue
         for (Stage stage : stages) {
             if (isDateEchue(stage.getDatefin())) {
-                sendEmail(stage.getStagiaire().getEmail(), "Le stage est échu", "Le stage est échu pour le libellé : " + stage.getLibelle());
+                boolean isMailSent = sendEmail("lastar.niane@gmail.com", "Le stage est échu", "Le stage : " + stage.getUio() +  " | " + stage.getUuid() +  " | " + stage.getLibelle() + "est echu");
+                if (isMailSent) {
+                    System.out.println("Email envoyé avec succès");
+                } else {
+                    System.out.println("Échec de l'envoi de l'email");
+                }
             }
         }
     }
@@ -37,7 +42,7 @@ public class MailServiceImpl {
         return dateFin != null && dateFin.before(currentDate);
     }
 
-    private void sendEmail(String to, String subject, String text) {
+    private boolean sendEmail(String to, String subject, String text) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(to);
@@ -45,9 +50,11 @@ public class MailServiceImpl {
             message.setText(text);
 
             javamailsender.send(message);
+            return true; // Retourne true si l'email est envoyé avec succès
         } catch (Exception e) {
             // Gérer l'exception (journalisation, notification, etc.)
             e.printStackTrace();
+            return false; // Retourne false en cas d'échec de l'envoi de l'email
         }
     }
 }
