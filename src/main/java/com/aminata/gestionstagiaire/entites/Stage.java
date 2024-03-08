@@ -21,12 +21,15 @@ public class Stage {
     private Date datedebut;
     @NonNull
     private Date datefin;
+    @NonNull
+    private Number codebadge;
 
-    public Stage(String libelle, Date date_debut, Date date_fin) {
+    public Stage(String libelle, Date date_debut, Date date_fin, Number codebadge) {
         this.uuid = genererRandomUUID();
         this.libelle = libelle;
         this.datedebut = date_debut;
         this.datefin = date_fin;
+        this.codebadge = codebadge;
     }
 
     @ManyToOne
